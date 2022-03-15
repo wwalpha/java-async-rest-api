@@ -58,7 +58,7 @@ public class AsyncController {
 }
 ```
 
-## Steps
+## Test
 - Start Application with Eclipse
 - Run **`POST http://localhost:8080/create`** to get the new task id
 - Run **`GET http://localhost:8080/status?id=XX`** to get the latest task status
