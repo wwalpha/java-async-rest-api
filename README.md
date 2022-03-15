@@ -41,6 +41,23 @@ public class AsyncService {
 }
 ```
 
+### Call async method from controller
+```
+@RestController
+public class AsyncController {
+	...
+	@Autowired
+	private AsyncService asyncService;
+	
+	@RequestMapping(value = "/create", method = RequestMethod.POST)
+	public String createTask() throws InterruptedException, ExecutionException {
+		...
+		asyncService.doTask2(taskId)
+		...
+	}
+}
+```
+
 ## Steps
 - Start Application with Eclipse
 - Run **`POST http://localhost:8080/create`** to get the new task id
