@@ -7,6 +7,7 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 
 import lombok.Data;
+import lombok.Getter;
 import lombok.Setter;
 
 @Entity
@@ -15,19 +16,13 @@ import lombok.Setter;
 public class TaskStatus {
 
 	@Setter
+	@Getter
 	@Id
 	@GeneratedValue
 	private Long id;
 
 	@Setter
+	@Getter
 	@Column(name = "status", nullable = false)
 	private String status;
-
-	public String getStatus() {
-		return this.status;
-	}
-
-	public Long getId() {
-		return this.id;
-	}
 }

@@ -21,6 +21,7 @@ public class AsyncService {
 	public void doTask1(long id) throws InterruptedException {
 		log.info("Task1 Start...");
 
+		// simulate task execution for 15s
 		Thread.sleep(15000L);
 
 		TaskStatus entity = repo.findById(Long.valueOf(id)).get();
@@ -35,6 +36,7 @@ public class AsyncService {
 	public void doTask2(long id) throws InterruptedException {
 		log.info("Task2 Start...");
 
+		// simulate task execution for 10s
 		Thread.sleep(10000L);
 
 		TaskStatus entity = repo.findById(Long.valueOf(id)).get();

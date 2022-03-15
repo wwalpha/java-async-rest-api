@@ -24,12 +24,21 @@ public class AsyncController {
 	@Autowired
 	private TaskStatusService statusService;
 
+	/**
+	 * Create new task
+	 * 
+	 * @return
+	 * @throws InterruptedException
+	 * @throws ExecutionException
+	 */
 	@RequestMapping(value = "/create", method = RequestMethod.POST)
 	public String createTask() throws InterruptedException, ExecutionException {
 		log.info("testAsync Start...");
 
+		// create new task
 		long taskId = statusService.getTaskId();
 
+		// choice success / failure task
 		if (taskId % 2 == 1) {
 			asyncService.doTask1(taskId);
 		} else {
@@ -38,17 +47,28 @@ public class AsyncController {
 
 		log.info("testAsync Complete...");
 
+		// return task id
 		return String.valueOf(taskId);
 	}
 
+	/**
+	 * Confirm task status with taskId
+	 * 
+	 * @param taskId
+	 * @return
+	 * @throws InterruptedException
+	 * @throws ExecutionException
+	 */
 	@RequestMapping(value = "/status", method = RequestMethod.GET)
 	public String getStatus(@RequestParam(name = "id") long taskId) throws InterruptedException, ExecutionException {
 		log.info("testAsync Start...");
 
+		// get task status
 		String status = statusService.getStatus(taskId);
 
 		log.info("testAsync Complete...");
 
+		// return task status
 		return status;
 	}
 }
