@@ -7,7 +7,40 @@
 	- spring.jpa.properties
 - Auto generate JPA classes
 	- maven plugin
+
+## Configure
+### Enable Async
+```
+@Configuration
+@EnableAsync
+public class AsyncConfiguration 
+{
+	@Bean(name = "asyncExecutor")
+	public Executor asyncExecutor() {
+		ThreadPoolTaskExecutor executor = new ThreadPoolTaskExecutor();
+		executor.setCorePoolSize(3);
+		executor.setMaxPoolSize(3);
+		executor.setQueueCapacity(100);
+		executor.setThreadNamePrefix("AsynchThread-");
+		executor.initialize();
+		return executor;
+	}
+}
+```
+
+### Add async method with service class
+```
+@Service
+public class AsyncService {
+	...
 	
+	@Async("asyncExecutor")
+	public void doTask1(long id) throws InterruptedException {
+		...
+	}
+}
+```
+
 ## Steps
 - Start Application with Eclipse
 - Run **`POST http://localhost:8080/create`** to get the new task id
